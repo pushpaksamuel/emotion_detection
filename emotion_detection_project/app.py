@@ -4,9 +4,17 @@ import cv2
 from tensorflow.keras.models import load_model
 from PIL import Image
 import time
+import gdown
+import os
 
-# Load the emotion model
-model = load_model("model/my_model.keras")
+model_path = "model/my_model.keras"
+
+if not os.path.exists(model_path):
+    url = "https://drive.google.com/file/d/1-JxgNAvYSCstSbIXJYMmPIMPgKS30Ibu/view?usp=sharing"
+    gdown.download(url, model_path, quiet=False)
+
+model = load_model(model_path)
+
 emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
 
 # Emotion-based recommendations
