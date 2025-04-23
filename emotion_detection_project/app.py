@@ -21,6 +21,8 @@ if not os.path.exists(model_path):
 # Check if file is downloaded correctly
 if os.path.exists(model_path):
     print("Downloaded file size:", os.path.getsize(model_path))
+    print("File exists:", os.path.exists(model_path))
+    print("File size:", os.path.getsize(model_path))
     model = load_model(model_path)
 else:
     raise FileNotFoundError("Model file could not be downloaded correctly.")
