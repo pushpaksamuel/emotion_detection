@@ -10,11 +10,12 @@ import os
 # Create 'model' folder if it doesn't exist
 os.makedirs("model", exist_ok=True)
 
-model_path = "model/my_model.keras"
+model_path = "model\my_model.keras"
 
 if not os.path.exists(model_path):
     url = "https://drive.google.com/file/d/1-JxgNAvYSCstSbIXJYMmPIMPgKS30Ibu/view?usp=sharing"  # replace with your real file ID
     gdown.download(url, model_path, quiet=False)
+print("Downloaded file size:", os.path.getsize(model_path))
 
 # Now safely load the model
 from tensorflow.keras.models import load_model
