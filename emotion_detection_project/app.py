@@ -10,16 +10,20 @@ import os
 # Create 'model' folder if it doesn't exist
 os.makedirs("model", exist_ok=True)
 
-model_path = "model\my_model.keras"
+# Correct path and Google Drive direct link
+model_path = "model/my_model.keras"
+url = "https://drive.google.com/uc?id=1-JxgNAvYSCstSbIXJYMmPIMPgKS30Ibu"
 
+# Download model if not present
 if not os.path.exists(model_path):
-    url = "https://drive.google.com/file/d/1-JxgNAvYSCstSbIXJYMmPIMPgKS30Ibu/view?usp=sharing"  # replace with your real file ID
     gdown.download(url, model_path, quiet=False)
-print("Downloaded file size:", os.path.getsize(model_path))
 
-# Now safely load the model
-from tensorflow.keras.models import load_model
-model = load_model(model_path)
+# Check if file is downloaded correctly
+if os.path.exists(model_path):
+    print("Downloaded file size:", os.path.getsize(model_path))
+    model = load_model(model_path)
+else:
+    raise FileNotFoundError("Model file could not be downloaded correctly.")
 
 
 emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
