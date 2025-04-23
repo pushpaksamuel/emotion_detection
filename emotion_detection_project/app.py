@@ -7,13 +7,19 @@ import time
 import gdown
 import os
 
+# Create 'model' folder if it doesn't exist
+os.makedirs("model", exist_ok=True)
+
 model_path = "model/my_model.keras"
 
 if not os.path.exists(model_path):
-    url = "https://drive.google.com/file/d/1-JxgNAvYSCstSbIXJYMmPIMPgKS30Ibu/view?usp=sharing"
+    url = "https://drive.google.com/file/d/1-JxgNAvYSCstSbIXJYMmPIMPgKS30Ibu/view?usp=sharing"  # replace with your real file ID
     gdown.download(url, model_path, quiet=False)
 
+# Now safely load the model
+from tensorflow.keras.models import load_model
 model = load_model(model_path)
+
 
 emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
 
